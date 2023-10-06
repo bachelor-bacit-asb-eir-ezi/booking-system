@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get("/timeslot", "App\Http\Controllers\TimeSlotController@index");
+
+Route::get("/test",function(){
+    return view("test");
+});
