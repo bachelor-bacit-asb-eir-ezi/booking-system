@@ -36,16 +36,7 @@
     }
 </style>
 <div>
-    <?php
-        use App\Models\Calender;
-        $calender = new Calender(2023,"Scrooge");
-        $weeks = $calender -> getWeeksList();
-        //$weekNumbers = array_keys($weeks);
-        $displayedWeek = 40;
-        $week = $calender -> getSpesificWeek($displayedWeek);
-        echo "<div id='calender'>";
-        
-    ?>
+    <div id='calender'>
     <div class="calendercolumn">
         <div class="day"></div>
         <?php 
@@ -59,10 +50,9 @@
         ?>
     </div>
     <?php 
-        $week -> insertTimeSlots($timeSlots);
     
         $week -> printWeekInfo();
-        echo "</div>";
     ?>
+    </div>
 </body>
 </html>

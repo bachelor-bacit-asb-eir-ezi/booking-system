@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Day;
 
-require __DIR__ . "/repetingFuncs.php";
 class Week
 {
     private $weekNumber;
