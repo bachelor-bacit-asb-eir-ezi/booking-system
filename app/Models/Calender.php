@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Week;
-require __DIR__ . "/repetingFuncs.php";
 
 class Calender
 {
