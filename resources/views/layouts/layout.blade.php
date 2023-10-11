@@ -7,9 +7,12 @@
 </head>
 <body>
 <style>
+
     #calender{
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
     .day{
         margin-left: 20px;
@@ -24,12 +27,12 @@
     .time{
         height: 50px;
         width: 100px;
+        text-align: center;
+        border: solid 1px black;
     }
     .calenderColumn{
         display:flex; 
         flex-direction: column; 
-        width:100px;
-        height: auto;
     }
     .occupiedTimeSlot{
         background-color: green;

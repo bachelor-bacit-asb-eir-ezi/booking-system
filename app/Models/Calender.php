@@ -4,6 +4,10 @@ namespace App\Models;
 
 use App\Models\Week;
 
+/**
+ * 
+ */
+
 class Calender
 {
     private $year;
@@ -16,7 +20,7 @@ class Calender
         $this -> weeks = $this -> getWeeksArrayForEntireYear($year);
     }
 
-    function getWeeksArrayForEntireYear($year){
+    private function getWeeksArrayForEntireYear($year){
         $weeksArray = array();
         for ($i = 1; $i<=52; $i++){
             $weeksArray[$i] = new Week($i,$year);
@@ -24,11 +28,13 @@ class Calender
         return $weeksArray;
     }
     
+    #Henter matrisen som inneholder alle uker
     public function getWeeksList(){
         
         return $this -> weeks;
     }
 
+    #Henter en uke basert på uke nummer
     public function getSpesificWeek($weekNumber){
         return $this -> weeks[$weekNumber];
     }
