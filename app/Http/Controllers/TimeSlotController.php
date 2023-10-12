@@ -11,12 +11,9 @@ class TimeSlotController extends Controller
     public function index(){
         $timeSlots = TimeSlot::all();
         $calender = new Calender(2023,"Scrooge");
-        $displayedWeek = 41;
-        $week = $calender -> getSpesificWeek($displayedWeek);
-        $week -> insertTimeSlots($timeSlots);
-    
+        $calender -> fillWeeksWithTimeslots($timeSlots);
         return view('timeslot',[
-            "week" => $week,
+            "calender" => $calender,
         ]);
     }
 }

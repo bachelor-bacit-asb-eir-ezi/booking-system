@@ -11,13 +11,15 @@ use App\Models\Week;
 class Calender
 {
     private $year;
-    private $tutor;
+    private $tutor; //Gjør ikke nooe for øyeblikket, skal brukes for å filtrere basert på LA
     private $weeks;
+    public $displayedWeek;
 
-    function __construct($year,$tutor){
+    public function __construct($year,$tutor){
         $this -> year = $year;
         $this -> tutor = $tutor;
         $this -> weeks = $this -> getWeeksArrayForEntireYear($year);
+        $this -> displayedWeek = date("w");
     }
 
     private function getWeeksArrayForEntireYear($year){
@@ -37,6 +39,12 @@ class Calender
     #Henter en uke basert på uke nummer
     public function getSpesificWeek($weekNumber){
         return $this -> weeks[$weekNumber];
+    }
+
+    public function fillWeeksWithTimeslots($timeSlots){
+        foreach($this -> weeks as $week){
+            $week -> insertTimeSlots($timeSlots);
+        }
     }
 
 }
