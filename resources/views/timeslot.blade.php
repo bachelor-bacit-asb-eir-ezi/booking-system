@@ -9,19 +9,16 @@
         // To neste linjene er for å hindre at disse kjøres når siden er refreshet (chat GPT)
         header("Location: timeslot"); 
         exit;
-    } elseif(isset($_POST["nextWeek"])){
+    } elseif(isset($__POST["nextWeek"])){
         $_SESSION["displayedWeek"]++ ;
         header("Location: timeslot"); 
         exit;
     } else {
-        #CHAT GPT kode, vet ikke hvorfor men fikset problemet mitt
-        if (isset($_SESSION['displayedWeek'])) {
-            $displayedWeek = $_SESSION['displayedWeek'];
-        } else {
-            $displayedWeek = $calendar->displayedWeek; // Default value
-        }
+        if (!isset($_SESSION['displayedWeek'])) {
+            $_SESSION['displayedWeek'] = $calender->displayedWeek; 
+        } 
     }
-    $week = $calender -> getSpesificWeek($_SESSION['displayedWeek']);
+    $week = $calender -> getSpecificWeek($_SESSION['displayedWeek']);
 
 ?>
 <main>

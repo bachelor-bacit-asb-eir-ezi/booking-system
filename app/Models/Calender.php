@@ -37,7 +37,7 @@ class Calender
     }
 
     #Henter en uke basert på uke nummer
-    public function getSpesificWeek($weekNumber){
+    public function getSpecificWeek($weekNumber){
         return $this -> weeks[$weekNumber];
     }
 
