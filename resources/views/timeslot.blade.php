@@ -49,4 +49,14 @@
         ?>
     </div>
 </main>
+<div id="infoTimeSlot">
+    
+</div>
+<script>
+    $(".occupiedTimeSlot").click(function(){
+        $("#infoTimeSlot").toggle();
+        id = this.id;
+        $("#infoTimeSlot").html(id);
+    });
+</script>
 @endsection

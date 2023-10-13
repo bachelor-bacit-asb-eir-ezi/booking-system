@@ -42,10 +42,12 @@ class Day
         foreach ($this -> timeArray as $time){
           echo "<div class='timeSlot ";
           if ($time){
-              echo " occupiedTimeSlot'>";
+              $timeSlotId = $time -> timeslot_id;
               $tutorId = $time -> tutor_id; //Gjør ikke noe enda pga tutor/LA table eksisterer ikke
               $desciption = $time -> description;
-              echo "<b> $desciption</b>";
+              echo " occupiedTimeSlot' id='$timeSlotId'>";
+              echo "<form id='$timeSlotId'><input type='hidden' value='$desciption'></form>";
+              //echo "<b> $desciption</b>";
           } else {
             echo "'>";
               //Gjør sånn at LA kan opprette timeslot her
