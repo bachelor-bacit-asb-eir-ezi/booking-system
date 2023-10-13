@@ -4,13 +4,13 @@
 <?php
     session_start();
     //Bruker GET for laravel gir feilmelding når POST blir brukt
-    if (isset($_POST["prevWeek"])){
-        $_SESSION["displayedWeek"]-- ;
+    if (isset($_POST["nextWeek"])){
+        $_SESSION["displayedWeek"]++ ;
         // To neste linjene er for å hindre at disse kjøres når siden er refreshet (chat GPT)
         header("Location: timeslot"); 
         exit;
-    } elseif(isset($__POST["nextWeek"])){
-        $_SESSION["displayedWeek"]++ ;
+    } elseif(isset($_POST["prevWeek"])){
+        $_SESSION["displayedWeek"]-- ;
         header("Location: timeslot"); 
         exit;
     } else {
