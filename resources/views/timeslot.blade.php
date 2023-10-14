@@ -13,7 +13,11 @@
         $_SESSION["displayedWeek"]-- ;
         header("Location: timeslot"); 
         exit;
-    } else {
+    } elseif(isset($_POST["searchWeek"])){
+        $_SESSION["displayedWeek"] = $_POST["weekNumber"];
+        header("Location: timeslot"); 
+        exit;
+    }else {
         if (!isset($_SESSION['displayedWeek'])) {
             $_SESSION['displayedWeek'] = $calender->displayedWeek; 
         } 
@@ -30,6 +34,13 @@
     <form method="POST">
         @csrf
         <input type="submit" name="nextWeek" value="next">
+    </form>
+    <form method="POST">
+        @csrf
+        <label> Søk etter uke:
+            <input type="int" name="weekNumber">
+        </label>
+        <input type="submit" name="searchWeek" value="Søk">
     </form>
     <div id='calender'>
         <div class="calendercolumn">
@@ -50,13 +61,25 @@
     </div>
 </main>
 <div id="infoTimeSlot">
-    
+
 </div>
 <script>
     $(".occupiedTimeSlot").click(function(){
         $("#infoTimeSlot").toggle();
         id = this.id;
-        $("#infoTimeSlot").html(id);
+        //date = $(this).children('.timeSlotDate').val();
+        date = $("#" + id + " input[name=timeSlotDate]").val();
+        startTime = $("#" + id + " input[name=timeSlotStartTime]").val();
+        endTime = $("#" + id + " input[name=timeSlotEndTime]").val();
+        description = $("#" + id + " input[name=timeSlotDescription]").val();
+        infoBoksContent = "<form>" + "<input readonly value='" + date + "'>" +
+                                "<input readonly value='" + startTime + "'>" +
+                                "<input readonly value='" + endTime + "'>" +
+                                "<input readonly value='" + description + "'>" + 
+                                "<input type='submit' value='Book Tidsrom'>" +
+                                "</form>";
+        console.log(date);
+        $("#infoTimeSlot").html(infoBoksContent);
     });
 </script>
 @endsection

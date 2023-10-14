@@ -44,9 +44,18 @@ class Day
           if ($time){
               $timeSlotId = $time -> timeslot_id;
               $tutorId = $time -> tutor_id; //Gjør ikke noe enda pga tutor/LA table eksisterer ikke
+              $date = $time -> date;
+              $startTime = $time -> start_time;
+              $endTime = $time -> end_time;
               $desciption = $time -> description;
               echo " occupiedTimeSlot' id='$timeSlotId'>";
-              echo "<form id='$timeSlotId'><input type='hidden' value='$desciption'></form>";
+              echo "<form id='$timeSlotId'>
+                      <input type='hidden' value='$tutorId'>
+                      <input name='timeSlotDate' type='hidden' value='$date'>
+                      <input name='timeSlotStartTime' type='hidden' value='$startTime'>
+                      <input name='timeSlotEndTime' type='hidden' value='$endTime'>
+                      <input name='timeSlotDescription' type='hidden' value='$desciption'>
+                    </form>";
               //echo "<b> $desciption</b>";
           } else {
             echo "'>";

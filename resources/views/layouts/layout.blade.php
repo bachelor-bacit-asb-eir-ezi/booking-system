@@ -46,7 +46,8 @@
         position: absolute;
         height: 500px;
         width: 500px;
-        background-color: red;
+        border: solid black 2px;
+        background-color: white;
         top: 0;
         display: none;
     }
