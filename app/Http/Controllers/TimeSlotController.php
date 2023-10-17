@@ -4,34 +4,50 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TimeSlot;
-use App\Models\Calender;
-use Illuminate\Support\Facades\DB;
 use App\Exceptions\InvalidOrderException;
+use App\Models\Week;
+use DateTime;
 
 class TimeSlotController extends Controller
 {
 
-    public function index(){
+    public function index(Request $request){
+        switch ($request -> input("changeWeek")) {
+            case "nextWeek":
+                $weekNumber = $request -> input("weekNumber");
+                $weekNumber++;
+              break;
+            case "prevWeek":
+                $weekNumber = $request -> input("weekNumber");
+                $weekNumber--;
+              break;
+            case "searchWeek":
+                $weekNumber = $request -> input("weekNumber");
+              break;
+            default:
+                $weekNumber = date("W");
+                break;
+          }
+        $week = new Week($weekNumber,2023);
         $timeSlots = TimeSlot::all();
-        $calender = new Calender(2023,"Scrooge");
-        $calender -> fillWeeksWithTimeslots($timeSlots);
+        $week -> insertTimeSlots($timeSlots);
         return view("timeslot",[
-            "calender" => $calender,
+            "week" => $week,
         ]);
     }
 
     public function displayTimeSlot(Request $request){
         
-        $timeSlot = DB::table("time_slots") -> where("timeslot_id",$request -> input("timeSlotId")) -> get();
-        return view("displayTimeSlot",["timeSlot" => $timeSlot]);
+        $timeSlot = TimeSlot::where("timeslot_id",$request -> input("timeSlotId")) -> get();
+        return view("displayTimeSlot",[
+            "timeSlot" => $timeSlot,
+        ]);
     }
     
     public function bookTimeSlot(Request $request){
         //brukes som mock til login er fikset
         $userID = 1;
-
-        TimeSlot::where("timeslot_id", $request->input("timeSlotId"))->update(["booked_by" => $userID]);
-
-        return redirect()->action([TimeSlotController::class, 'index']);;
+        TimeSlot::where("timeslot_id", $request -> input("timeSlotId")) -> update(["booked_by" => $userID]);
+        return redirect("timeslot");
     }
 }

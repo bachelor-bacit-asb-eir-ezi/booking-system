@@ -56,7 +56,6 @@ class Day
                     </form>";
           } else {
             echo "'>";
-              //Gjør sånn at LA kan opprette timeslot her
           }
           echo "</div>";
       }

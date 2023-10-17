@@ -1,46 +1,26 @@
 @extends("layouts.layout")
 
 @section("content")
-<?php
-    session_start();
-    //Bruker GET for laravel gir feilmelding når POST blir brukt
-    if (isset($_POST["nextWeek"])){
-        $_SESSION["displayedWeek"]++ ;
-        // To neste linjene er for å hindre at disse kjøres når siden er refreshet (chat GPT)
-        header("Location: timeslot"); 
-        exit;
-    } elseif(isset($_POST["prevWeek"])){
-        $_SESSION["displayedWeek"]-- ;
-        header("Location: timeslot"); 
-        exit;
-    } elseif(isset($_POST["searchWeek"])){
-        $_SESSION["displayedWeek"] = $_POST["weekNumber"];
-        header("Location: timeslot"); 
-        exit;
-    }else {
-        if (!isset($_SESSION['displayedWeek'])) {
-            $_SESSION['displayedWeek'] = $calender->displayedWeek; 
-        } 
-    }
-    $week = $calender -> getSpecificWeek($_SESSION['displayedWeek']);
-
-?>
-<main>
-    <b>{{$_SESSION['displayedWeek']}}</b>
-    <form method="POST">
+    <b>{{$week -> getWeekNumber()}}</b>
+    <form method="POST" action="/timeslot">
         @csrf
+        <input type="hidden" name="weekNumber" value="{{$week -> getWeekNumber()}}">
+        <input type="hidden" name="changeWeek" value="prevWeek">
         <input type="submit" name="prevWeek" value="previous">
     </form>
-    <form method="POST">
+    <form method="POST" action="/timeslot">
         @csrf
-        <input type="submit" name="nextWeek" value="next">
+        <input type="hidden" name="weekNumber" value="{{$week -> getWeekNumber()}}">
+        <input type="hidden" name="changeWeek" value="nextWeek">
+        <input type="submit" value="next">
     </form>
-    <form method="POST">
+    <form method="POST" action="/timeslot">
         @csrf
         <label> Søk etter uke:
             <input type="int" name="weekNumber">
         </label>
-        <input type="submit" name="searchWeek" value="Søk">
+        <input type="hidden" name="changeWeek" value="searchWeek">
+        <input type="submit" value="Søk">
     </form>
     <div id='calender'>
         <div class="calendercolumn">
@@ -55,8 +35,33 @@
                 }
             ?>
         </div>
+        @foreach ($week -> getDaysInWeek() as $day)
+        <div class='calenderColumn'>
+            <div class='day'> 
+                {{$day -> getDayName()}} <br> 
+                {{$day -> getDate()}}<br>
+            </div>
+            @foreach($day -> timeArray as $time)
+            @if($time)
+                @if($time -> booked_by == null)
+                    <div id="{{$time -> timeslot_id}}" class="timeSlot availebleTimeSlot">
+                    
+                @else
+                    <div id="{{$time -> timeslot_id}}" class="timeSlot occupiedTimeSlot">
+                    
+                @endif
+                    <form method='GET' action='/displayTimeSlot' id='{{$time -> timeslot_id}}timeSlotForm'>
+                        <input type='hidden' name='timeSlotId' value='{{$time -> timeslot_id}}'>
+                    </form>
+                </div>
+            @else
+                <div class="timeSlot">
+                </div>           
+            @endif
+            @endforeach
+        </div>
+        @endforeach
         <?php 
-            $week -> printWeekInfo();
         ?>
     </div>
 </main>

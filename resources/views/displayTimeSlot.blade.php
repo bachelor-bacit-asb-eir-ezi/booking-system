@@ -26,6 +26,7 @@
         @csrf
         @foreach($timeSlot as $slot)
         <input name="timeSlotId" type="hidden" value="{{$slot->timeslot_id}}">
+        <input name="timeSlotDate" type="hidden" value="{{$slot->date}}">
         @endforeach
         <input type="submit" value="Book veilednings time">
     </form>

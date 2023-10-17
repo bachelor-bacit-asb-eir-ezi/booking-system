@@ -49,8 +49,8 @@ class Week
     }
     
     
-    private function getFirstDateOfWeek($weekNumber){ 
-        $date = new \DateTime();  
+    public function getFirstDateOfWeek($weekNumber){ 
+        $date = new \DateTime(); 
         $date->setISODate($this->year, $weekNumber); 
         return $date;
     }
@@ -70,13 +70,9 @@ class Week
             foreach($timeSlots as $timeSlot){
                 $timeSlotTime = $timeSlot -> start_time;
                 $timeSlotDate = $timeSlot -> date;
-
                 $day = $this -> getDayInWeekByDate($timeSlotDate);
                 if(!$day == null){
-                    $date = $day -> getDate();
-                    if ($timeSlotDate == $date){
-                        $day -> timeArray[$timeSlotTime] = $timeSlot;
-                    }
+                    $day -> timeArray[$timeSlotTime] = $timeSlot;
                 }
             }
     }
