@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use function PHPUnit\Framework\isNull;
+
 class Day
 {
     private $dayName;
@@ -42,13 +44,18 @@ class Day
         foreach ($this -> timeArray as $time){
           echo "<div class='timeSlot ";
           if ($time){
-              echo " occupiedTimeSlot'>";
-              $tutorId = $time -> tutor_id; //Gjør ikke noe enda pga tutor/LA table eksisterer ikke
-              $desciption = $time -> description;
-              echo "<b> $desciption</b>";
+              $timeSlotId = $time -> timeslot_id;
+              if (!$time -> tutor_id == 0){
+                echo " occupiedTimeSlot' id='$timeSlotId'>";
+                echo $time -> tutor_id;
+              } else{
+                echo " availebleTimeSlot' id='$timeSlotId'>";
+              }
+              echo "<form method='GET' action='/displayTimeSlot' id='$timeSlotId" . "timeSlotForm" . "'>
+                        <input type='hidden' name='timeSlotId' value='$timeSlotId'>
+                    </form>";
           } else {
             echo "'>";
-              //Gjør sånn at LA kan opprette timeslot her
           }
           echo "</div>";
       }

@@ -18,9 +18,15 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::any("/timeslot", "App\Http\Controllers\TimeSlotController@index");
 
+
+Route::any("/timeslot", "App\Http\Controllers\TimeSlotController@index");
 Route::post("/register", [UserController::class, "register"]);
 Route::post("/login", [UserController::class, "login"]);
 Route::post("/logout", [UserController::class, "logout"]);
 
+
+
+Route::get('/displayTimeSlot', "App\Http\Controllers\TimeSlotController@displayTimeSlot");
+
+Route::post("/bookTimeSlot", "App\Http\Controllers\TimeSlotController@bookTimeSlot");
