@@ -14,6 +14,7 @@ class Day
         $this->timeArray = $this->fillTimeArray();
       }
     
+      #Fyller timeArray med key/value pair der key er klokkeslett og value er null
       private function fillTimeArray(){
         for($i = 7; $i < 24; $i++){
           $j = strval($i);
@@ -36,7 +37,7 @@ class Day
         return $this->date;
       }
 
-
+      #Genererer HTML for inhold i timeArray
       public function printTimeArray(){
         foreach ($this -> timeArray as $time){
           echo "<div class='timeSlot ";

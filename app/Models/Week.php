@@ -20,12 +20,12 @@ class Week
     private function fillListByWeekNumber($weekNumber){
         $days = array();
         //Finn første dag i uka
-        $firstDayOfWeek = $this -> getFirstDateOfWeek($weekNumber);
+        $dayOfWeek = $this -> getFirstDateOfWeek($weekNumber);
         // Loop through the dates +6 (7 days total)
         $dayNameArray = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
         for ($i = 0; $i < 7; $i++) {
-            $days[] = new Day($dayNameArray[$i], $firstDayOfWeek->format('Y-m-d'));
-            $firstDayOfWeek->modify("+1 day");
+            $days[] = new Day($dayNameArray[$i], $dayOfWeek->format('Y-m-d'));
+            $dayOfWeek->modify("+1 day");
         }
         //returner liste
         return $days;
@@ -50,12 +50,12 @@ class Week
     
     
     private function getFirstDateOfWeek($weekNumber){ 
-        $dateTime = new \DateTime();  
-        $dateTime->setISODate($this->year, $weekNumber); 
-        return $dateTime;
+        $date = new \DateTime();  
+        $date->setISODate($this->year, $weekNumber); 
+        return $date;
     }
 
-
+    #Print HTML kode til uken
     public function printWeekInfo(){
         foreach ($this -> getDaysInWeek() as $day){
             $dayName = $day -> getDayName();
@@ -72,11 +72,11 @@ class Week
                 $timeSlotDate = $timeSlot -> date;
 
                 $day = $this -> getDayInWeekByDate($timeSlotDate);
-                $date = $day -> getDate();
-                
-
-                if ($timeSlotDate == $date){
-                    $day -> timeArray[$timeSlotTime] = $timeSlot;
+                if(!$day == null){
+                    $date = $day -> getDate();
+                    if ($timeSlotDate == $date){
+                        $day -> timeArray[$timeSlotTime] = $timeSlot;
+                    }
                 }
             }
     }

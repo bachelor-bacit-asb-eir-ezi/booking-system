@@ -1,58 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<style>
-    #calender{
-        display: flex;
-        flex-direction: row;
+@extends("layouts.layout")
+
+@section("content")
+<?php
+    session_start();
+    //Bruker GET for laravel gir feilmelding når POST blir brukt
+    if (isset($_POST["prevWeek"])){
+        $_SESSION["displayedWeek"]-- ;
+        // To neste linjene er for å hindre at disse kjøres når siden er refreshet (chat GPT)
+        header("Location: timeslot"); 
+        exit;
+    } elseif(isset($__POST["nextWeek"])){
+        $_SESSION["displayedWeek"]++ ;
+        header("Location: timeslot"); 
+        exit;
+    } else {
+        if (!isset($_SESSION['displayedWeek'])) {
+            $_SESSION['displayedWeek'] = $calender->displayedWeek; 
+        } 
     }
-    .day{
-        margin-left: 20px;
-        height: 50px;
-        width: 100px;
-    }
-    .timeSlot{
-        border: solid 1px black;
-        height: 50px;
-        width: 100px;
-    }
-    .time{
-        height: 50px;
-        width: 100px;
-    }
-    .calenderColumn{
-        display:flex; 
-        flex-direction: column; 
-        width:100px;
-        height: auto;
-    }
-    .occupiedTimeSlot{
-        background-color: green;
-    }
-</style>
-<div>
+    $week = $calender -> getSpecificWeek($_SESSION['displayedWeek']);
+
+?>
+<main>
+    <b>{{$_SESSION['displayedWeek']}}</b>
+    <form method="POST">
+        @csrf
+        <input type="submit" name="prevWeek" value="previous">
+    </form>
+    <form method="POST">
+        @csrf
+        <input type="submit" name="nextWeek" value="next">
+    </form>
     <div id='calender'>
-    <div class="calendercolumn">
-        <div class="day"></div>
-        <?php 
-            for ($i = 7; $i < 24; $i++){
-                if ($i < 10){
-                    echo "<div class='time'>0$i:00</div>";
-                } else {
-                    echo "<div class='time'>$i:00</div>";
+        <div class="calendercolumn">
+            <div class="day"></div>
+            <?php 
+                for ($i = 7; $i < 24; $i++){
+                    if ($i < 10){
+                        echo "<div class='time'>0$i:00</div>";
+                    } else {
+                        echo "<div class='time'>$i:00</div>";
+                    }
                 }
-            }
+            ?>
+        </div>
+        <?php 
+            $week -> printWeekInfo();
         ?>
     </div>
-    <?php 
-    
-        $week -> printWeekInfo();
-    ?>
-    </div>
-</body>
-</html>
+</main>
+@endsection
