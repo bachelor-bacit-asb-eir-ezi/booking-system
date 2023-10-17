@@ -39,6 +39,9 @@
         flex-direction: column; 
     }
     .occupiedTimeSlot{
+        background-color: yellow;
+    }
+    .availebleTimeSlot{
         background-color: green;
     }
 

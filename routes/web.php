@@ -19,6 +19,6 @@ Route::get('/', function () {
 
 Route::any("/timeslot", "App\Http\Controllers\TimeSlotController@index");
 
-Route::get("/test",function(){
-    return view("test");
-});
+Route::get('/displayTimeSlot', "App\Http\Controllers\TimeSlotController@displayTimeSlot");
+
+Route::post("/bookTimeSlot", "App\Http\Controllers\TimeSlotController@bookTimeSlot");

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use function PHPUnit\Framework\isNull;
+
 class Day
 {
     private $dayName;
@@ -43,20 +45,15 @@ class Day
           echo "<div class='timeSlot ";
           if ($time){
               $timeSlotId = $time -> timeslot_id;
-              $tutorId = $time -> tutor_id; //Gjør ikke noe enda pga tutor/LA table eksisterer ikke
-              $date = $time -> date;
-              $startTime = $time -> start_time;
-              $endTime = $time -> end_time;
-              $desciption = $time -> description;
-              echo " occupiedTimeSlot' id='$timeSlotId'>";
-              echo "<form id='$timeSlotId'>
-                      <input type='hidden' value='$tutorId'>
-                      <input name='timeSlotDate' type='hidden' value='$date'>
-                      <input name='timeSlotStartTime' type='hidden' value='$startTime'>
-                      <input name='timeSlotEndTime' type='hidden' value='$endTime'>
-                      <input name='timeSlotDescription' type='hidden' value='$desciption'>
+              if (!$time -> tutor_id == 0){
+                echo " occupiedTimeSlot' id='$timeSlotId'>";
+                echo $time -> tutor_id;
+              } else{
+                echo " availebleTimeSlot' id='$timeSlotId'>";
+              }
+              echo "<form method='GET' action='/displayTimeSlot' id='$timeSlotId" . "timeSlotForm" . "'>
+                        <input type='hidden' name='timeSlotId' value='$timeSlotId'>
                     </form>";
-              //echo "<b> $desciption</b>";
           } else {
             echo "'>";
               //Gjør sånn at LA kan opprette timeslot her
