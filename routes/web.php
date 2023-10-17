@@ -17,7 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::any("/timeslot", "App\Http\Controllers\TimeSlotController@index");
+
+
+
+
+
+
+
+
 
 Route::get('/displayTimeSlot', "App\Http\Controllers\TimeSlotController@displayTimeSlot");
 
