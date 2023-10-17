@@ -38,27 +38,4 @@ class Day
       public function getDate(){
         return $this->date;
       }
-
-      #Genererer HTML for inhold i timeArray
-      public function printTimeArray(){
-        foreach ($this -> timeArray as $time){
-          echo "<div class='timeSlot ";
-          if ($time){
-              $timeSlotId = $time -> timeslot_id;
-              if (!$time -> tutor_id == 0){
-                echo " occupiedTimeSlot' id='$timeSlotId'>";
-                echo $time -> tutor_id;
-              } else{
-                echo " availebleTimeSlot' id='$timeSlotId'>";
-              }
-              echo "<form method='GET' action='/displayTimeSlot' id='$timeSlotId" . "timeSlotForm" . "'>
-                        <input type='hidden' name='timeSlotId' value='$timeSlotId'>
-                    </form>";
-          } else {
-            echo "'>";
-          }
-          echo "</div>";
-      }
-      }
-      
 }

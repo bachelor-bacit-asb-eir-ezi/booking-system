@@ -48,22 +48,10 @@ class Week
         }
     }
     
-    
     public function getFirstDateOfWeek($weekNumber){ 
         $date = new \DateTime(); 
         $date->setISODate($this->year, $weekNumber); 
         return $date;
-    }
-
-    #Print HTML kode til uken
-    public function printWeekInfo(){
-        foreach ($this -> getDaysInWeek() as $day){
-            $dayName = $day -> getDayName();
-            $date = $day -> getDate();
-            echo "<div class='calenderColumn'><div class='day'> $dayName <br> $date<br></div>";
-            $day -> printTimeArray();
-            echo "</div>";
-        }
     }
 
     public function insertTimeSlots($timeSlots){
