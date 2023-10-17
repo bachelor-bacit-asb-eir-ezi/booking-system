@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,6 @@ Route::post("/register", [UserController::class, "register"]);
 Route::post("/login", [UserController::class, "login"]);
 Route::post("/logout", [UserController::class, "logout"]);
 
+Route::get("/forgot-password", [ForgotPasswordController::class, "ForgotPassword"])->name("forgot-password");
+Route::post("/forgot-password", [ForgotPasswordController::class, "ForgotPasswordPost"])->name("forgot-password.post");
+Route::get("/reset-password/{token}", [ForgotPasswordController::class, "ResetPassword"])->name("reset.password");
