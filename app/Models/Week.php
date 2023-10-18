@@ -4,8 +4,17 @@ namespace App\Models;
 
 use App\Models\Day;
 
+/**
+ * Week klassen har som hensikt å være en uke
+ * Den skal inneholde alle dager i uken, ukenummere til uken og hvilket år uken tilhører
+ * 
+ * @param weekNumber er uken ummeret til uken du vil lage
+ * @param year er årstallet som uken tilhører
+ * 
+ */
 class Week
 {
+    #Disse attributene skal være readonly derfor er de private og blir satt av constructor og gettere lar de bli lest andre plasser
     private $weekNumber;
     private $year; //For å finne ut hvilket år uken tilhører
     private $daysInWeek;
@@ -54,6 +63,7 @@ class Week
         return $date;
     }
 
+    #plasserer timeslots inne i alle dagene assosiert med uken
     public function insertTimeSlots($timeSlots){
             foreach($timeSlots as $timeSlot){
                 $timeSlotTime = $timeSlot -> start_time;
