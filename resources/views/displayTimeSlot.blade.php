@@ -18,6 +18,9 @@
             <label for="tutor">Veileder tilstede:</label>
             <input class="form-control" name="tutor" readonly type="text" value="{{ $slot->tutor_id }}">
 
+            <label for="location">Sted:</label>
+            <input class="form-control" name="location" readonly type="text" value="{{ $slot->location }}">
+
             <label for="description">Tema i fokus:</label>
             <input class="form-control" name="description" readonly type="text" value="{{ $slot->description }}">
             @if(!$slot -> booked_by == null)

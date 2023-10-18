@@ -45,10 +45,11 @@ class TimeSlotController extends Controller
 
         $date = sanitize($request -> input("date"));
         $startTime = sanitize($request -> input("startTime"));
-        $endTime = sanitize($request -> input("endTime"));
+        $endTime = date('h:i:s', strtotime($startTime)+3600);;
+        $location = sanitize($request -> input("location"));
         $description = sanitize($request -> input("description"));
 
-        TimeSlot::create(["tutor_id" => $tutorId, "date" => $date, "start_time" => $startTime, "end_time" => $endTime, "description" => $description]);
+        TimeSlot::create(["tutor_id" => $tutorId, "date" => $date, "start_time" => $startTime, "end_time" => $endTime, "location" => $location, "description" => $description]);
 
         return redirect("timeslot");
     }

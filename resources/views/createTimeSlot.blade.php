@@ -9,8 +9,8 @@
     <label for="startTime">Start tid:</label>
     <input required name="startTime" type="time">
 
-    <label for="endTime">Slutt tid:</label>
-    <input required name="endTime" type="time">
+    <label for="location">Sted:</label>
+    <input required name="location" type="text">
 
     <label for="description">Tema:</label>
     <input required name="description" type="text">
