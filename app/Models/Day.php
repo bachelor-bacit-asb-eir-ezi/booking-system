@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use function PHPUnit\Framework\isNull;
-
 /**
  * Day klassen inneholder informajsonen om hver enkelt dag som applikasjonen trenger
  * 
