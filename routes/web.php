@@ -29,6 +29,10 @@ Route::post("/logout", [UserController::class, "logout"]);
 
 Route::get('/displayTimeSlot', "App\Http\Controllers\TimeSlotController@displayTimeSlot");
 
+Route::any("/createTimeSlot", "App\Http\Controllers\TimeSlotController@createTimeSlot");
+
+Route::post("/submitTimeSlot", "App\Http\Controllers\TimeSlotController@submitTimeSlot");
+
 Route::post("/bookTimeSlot", "App\Http\Controllers\TimeSlotController@bookTimeSlot");
 
 Route::post("/unBookTimeSlot", "App\Http\Controllers\TimeSlotController@unBookTimeSlot");

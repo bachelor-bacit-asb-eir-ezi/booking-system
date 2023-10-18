@@ -11,9 +11,8 @@
         </form>
         <form method="POST" action="/timeslot" class="mx-5 mb-3">
             @csrf
-            <label> Søk etter uke:
-                <input type="int" name="weekNumber">
-            </label>
+            <label for="weekNumber"> Søk etter uke: </label>
+            <input type="int" name="weekNumber">
             <input type="hidden" name="changeWeek" value="searchWeek">
             <input type="submit" value="Søk">
         </form>

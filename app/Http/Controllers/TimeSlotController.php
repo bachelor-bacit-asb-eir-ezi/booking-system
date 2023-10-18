@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TimeSlot;
-use App\Exceptions\InvalidOrderException;
 use App\Models\Week;
-use DateTime;
 
 class TimeSlotController extends Controller
 {
@@ -36,6 +34,25 @@ class TimeSlotController extends Controller
         ]);
     }
 
+    #Sender bruket til createTimeSlot view
+    public function createTimeSlot(){
+        return view("createTimeSlot");
+    }
+
+    #Sender create time slot til database
+    public function submitTimeSlot(Request $request){
+        $tutorId = 1;
+
+        $date = sanitize($request -> input("date"));
+        $startTime = sanitize($request -> input("startTime"));
+        $endTime = sanitize($request -> input("endTime"));
+        $description = sanitize($request -> input("description"));
+
+        TimeSlot::create(["tutor_id" => $tutorId, "date" => $date, "start_time" => $startTime, "end_time" => $endTime, "description" => $description]);
+
+        return redirect("timeslot");
+    }
+
     public function displayTimeSlot(Request $request){
         
         $timeSlot = TimeSlot::where("timeslot_id",$request -> input("timeSlotId")) -> get();
@@ -55,4 +72,10 @@ class TimeSlotController extends Controller
         TimeSlot::where("timeslot_id", $request -> input("timeSlotId")) -> update(["booked_by" => null]);
         return redirect("timeslot");
     }
+}
+
+function sanitize($text){
+    $text = strip_tags($text);
+    $text = htmlspecialchars($text);
+    return $text;
 }
