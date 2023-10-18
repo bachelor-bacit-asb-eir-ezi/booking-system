@@ -50,4 +50,9 @@ class TimeSlotController extends Controller
         TimeSlot::where("timeslot_id", $request -> input("timeSlotId")) -> update(["booked_by" => $userID]);
         return redirect("timeslot");
     }
+
+    public function unBookTimeSlot(Request $request){
+        TimeSlot::where("timeslot_id", $request -> input("timeSlotId")) -> update(["booked_by" => null]);
+        return redirect("timeslot");
+    }
 }

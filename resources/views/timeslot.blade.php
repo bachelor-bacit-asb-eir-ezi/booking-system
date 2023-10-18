@@ -44,10 +44,10 @@
             @foreach($day -> timeArray as $time)
             @if($time)
                 @if($time -> booked_by == null)
-                    <div id="{{$time -> timeslot_id}}" class="timeSlot availebleTimeSlot">
+                    <div id="{{$time -> timeslot_id}}" class="timeSlotStyle timeSlot availebleTimeSlot">
                     
                 @else
-                    <div id="{{$time -> timeslot_id}}" class="timeSlot occupiedTimeSlot">
+                    <div id="{{$time -> timeslot_id}}" class="timeSlotStyle timeSlot occupiedTimeSlot">
                     
                 @endif
                     <form method='GET' action='/displayTimeSlot' id='{{$time -> timeslot_id}}timeSlotForm'>
@@ -55,7 +55,7 @@
                     </form>
                 </div>
             @else
-                <div class="timeSlot">
+                <div class="timeSlotStyle">
                 </div>           
             @endif
             @endforeach
@@ -66,7 +66,7 @@
     </div>
 </main>
 <script>
-    $(".availebleTimeSlot").click(function(){
+    $(".timeSlot").click(function(){
         $("#" + this.id + ">#" +this.id+"timeSlotForm").submit();
     });
 </script>

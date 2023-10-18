@@ -30,3 +30,5 @@ Route::post("/logout", [UserController::class, "logout"]);
 Route::get('/displayTimeSlot', "App\Http\Controllers\TimeSlotController@displayTimeSlot");
 
 Route::post("/bookTimeSlot", "App\Http\Controllers\TimeSlotController@bookTimeSlot");
+
+Route::post("/unBookTimeSlot", "App\Http\Controllers\TimeSlotController@unBookTimeSlot");
