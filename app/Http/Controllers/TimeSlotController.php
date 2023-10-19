@@ -36,6 +36,7 @@ class TimeSlotController extends Controller
 
     #Sender bruket til createTimeSlot view
     public function createTimeSlot(){
+        //bare la og lærer skal kunne bruke denne
         return view("createTimeSlot");
     }
 
@@ -70,6 +71,7 @@ class TimeSlotController extends Controller
     }
 
     public function unBookTimeSlot(Request $request){
+        //bare bruker som har booket timen skal kunne unbooke den timen
         TimeSlot::where("timeslot_id", $request -> input("timeSlotId")) -> update(["booked_by" => null]);
         return redirect("timeslot");
     }
