@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use function PHPUnit\Framework\isNull;
-
 /**
  * Day klassen inneholder informajsonen om hver enkelt dag som applikasjonen trenger
  * 
@@ -28,7 +26,7 @@ class Day
       }
     
       #Fyller timeArray med key/value pair der key er klokkeslett og value er null
-      private function fillTimeArray(){ //private fordi denne skal bare kjøres en gan av constructor
+      private function fillTimeArray(){ //private fordi denne skal bare kjøres en gang av constructor
         for($i = 7; $i < 24; $i++){
           $j = strval($i);
           if ($i < 10){

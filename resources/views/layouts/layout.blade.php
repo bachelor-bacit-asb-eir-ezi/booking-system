@@ -23,7 +23,7 @@
         height: 50px;
         width: 100px;
     }
-    .timeSlot{
+    .timeSlotStyle{
         border: solid 1px black;
         height: 50px;
         width: 100px;

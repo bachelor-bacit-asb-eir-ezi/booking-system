@@ -2,26 +2,27 @@
 
 @section("content")
     <b>{{$week -> getWeekNumber()}}</b>
-    <form method="POST" action="/timeslot">
-        @csrf
-        <input type="hidden" name="weekNumber" value="{{$week -> getWeekNumber()}}">
-        <input type="hidden" name="changeWeek" value="prevWeek">
-        <input type="submit" name="prevWeek" value="previous">
-    </form>
-    <form method="POST" action="/timeslot">
-        @csrf
-        <input type="hidden" name="weekNumber" value="{{$week -> getWeekNumber()}}">
-        <input type="hidden" name="changeWeek" value="nextWeek">
-        <input type="submit" value="next">
-    </form>
-    <form method="POST" action="/timeslot">
-        @csrf
-        <label> Søk etter uke:
+    <div class="d-flex justify-content-center">
+        <form method="POST" action="/timeslot" class="mx-5 mb-3">
+            @csrf
+            <input type="hidden" name="weekNumber" value="{{$week -> getWeekNumber()}}">
+            <input type="hidden" name="changeWeek" value="prevWeek">
+            <input type="submit" name="prevWeek" value="previous">
+        </form>
+        <form method="POST" action="/timeslot" class="mx-5 mb-3">
+            @csrf
+            <label for="weekNumber"> Søk etter uke: </label>
             <input type="int" name="weekNumber">
-        </label>
-        <input type="hidden" name="changeWeek" value="searchWeek">
-        <input type="submit" value="Søk">
-    </form>
+            <input type="hidden" name="changeWeek" value="searchWeek">
+            <input type="submit" value="Søk">
+        </form>
+        <form method="POST" action="/timeslot" class="mx-5 mb-3">
+            @csrf
+            <input type="hidden" name="weekNumber" value="{{$week -> getWeekNumber()}}">
+            <input type="hidden" name="changeWeek" value="nextWeek">
+            <input type="submit" value="next">
+        </form>
+    </div>
     <div id='calender'>
         <div class="calendercolumn">
             <div class="day"></div>
@@ -44,10 +45,10 @@
             @foreach($day -> timeArray as $time)
             @if($time)
                 @if($time -> booked_by == null)
-                    <div id="{{$time -> timeslot_id}}" class="timeSlot availebleTimeSlot">
+                    <div id="{{$time -> timeslot_id}}" class="timeSlotStyle timeSlot availebleTimeSlot">
                     
                 @else
-                    <div id="{{$time -> timeslot_id}}" class="timeSlot occupiedTimeSlot">
+                    <div id="{{$time -> timeslot_id}}" class="timeSlotStyle timeSlot occupiedTimeSlot">
                     
                 @endif
                     <form method='GET' action='/displayTimeSlot' id='{{$time -> timeslot_id}}timeSlotForm'>
@@ -55,7 +56,7 @@
                     </form>
                 </div>
             @else
-                <div class="timeSlot">
+                <div class="timeSlotStyle">
                 </div>           
             @endif
             @endforeach
@@ -66,7 +67,7 @@
     </div>
 </main>
 <script>
-    $(".availebleTimeSlot").click(function(){
+    $(".timeSlot").click(function(){
         $("#" + this.id + ">#" +this.id+"timeSlotForm").submit();
     });
 </script>
