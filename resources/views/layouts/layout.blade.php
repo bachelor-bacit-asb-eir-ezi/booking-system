@@ -38,6 +38,8 @@
         background-color: green;
     }
 </style>
+    <!-- NAVBAR -->
     @yield("content")
+    <!-- FOOTER -->
 </body>
 </html>
