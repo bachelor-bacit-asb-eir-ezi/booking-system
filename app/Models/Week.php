@@ -44,6 +44,10 @@ class Week
         return $this->weekNumber;
     }
 
+    public function getYear(){
+        return $this->year;
+    }
+
     public function getDaysInWeek(){
         return $this->daysInWeek;
     }
