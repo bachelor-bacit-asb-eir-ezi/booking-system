@@ -74,6 +74,7 @@
     </div>
 </main>
 <script>
+    //Gjør timeSlot i kalender klikkbare
     $(".timeSlot").click(function(){
         $("#" + this.id + ">#" +this.id+"timeSlotForm").submit();
     });
