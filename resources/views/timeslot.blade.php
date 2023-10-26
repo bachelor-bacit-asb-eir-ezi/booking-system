@@ -69,8 +69,6 @@
             @endforeach
         </div>
         @endforeach
-        <?php 
-        ?>
     </div>
 </main>
 <script>
