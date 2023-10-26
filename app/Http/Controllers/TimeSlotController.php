@@ -10,23 +10,33 @@ class TimeSlotController extends Controller
 {
 
     public function index(Request $request){
+        $year = $request -> input("year");
         switch ($request -> input("changeWeek")) {
             case "nextWeek":
                 $weekNumber = $request -> input("weekNumber");
                 $weekNumber++;
-              break;
+                if ($weekNumber > 52){
+                    $year ++;
+                    $weekNumber = 1;
+                }
+                break;
             case "prevWeek":
                 $weekNumber = $request -> input("weekNumber");
                 $weekNumber--;
-              break;
+                if ($weekNumber < 1){
+                    $year --;
+                    $weekNumber = 52;
+                }
+                break;
             case "searchWeek":
                 $weekNumber = $request -> input("weekNumber");
-              break;
+                break;
             default:
                 $weekNumber = date("W");
+                $year = date("Y");
                 break;
-          }
-        $week = new Week($weekNumber,2023);
+        }
+        $week = new Week($weekNumber,$year);
         $timeSlots = TimeSlot::all();
         $week -> insertTimeSlots($timeSlots);
         return view("timeslot",[
@@ -50,7 +60,9 @@ class TimeSlotController extends Controller
         $location = sanitize($request -> input("location"));
         $description = sanitize($request -> input("description"));
 
-        TimeSlot::create(["tutor_id" => $tutorId, "date" => $date, "start_time" => $startTime, "end_time" => $endTime, "location" => $location, "description" => $description]);
+        TimeSlot::create(["tutor_id" => $tutorId, "date" => $date,
+                            "start_time" => $startTime, "end_time" => $endTime,
+                            "location" => $location, "description" => $description]);
 
         return redirect("timeslot");
     }

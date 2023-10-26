@@ -7,8 +7,8 @@ namespace App\Models;
  * 
  * @see denne funksjonen er sterkt tilknyttet Week klassen, og timeslot siden det er inne i denne funksjonen TimeSlot blir lagret
  * 
- * @param dayName er ukedagen til dagen (eksempel: mandag, tirsdag osv...)
- * @param date er datoen til dagen (eksempel: 2023.10.05)
+ * @param string $dayName er ukedagen til dagen (eksempel: mandag, tirsdag osv...)
+ * @param date $date er datoen til dagen (eksempel: 2023.10.05)
  * 
  */
 
