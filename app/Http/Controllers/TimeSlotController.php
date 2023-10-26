@@ -29,7 +29,18 @@ class TimeSlotController extends Controller
                 }
                 break;
             case "searchWeek":
-                $weekNumber = $request -> input("weekNumber");
+                #for å forhindre at bruker kan søke på ukenummer høyere en mulig eller lavere (0 < weekNumber < 53)
+                switch ($weekNumber = $request -> input("weekNumber")){
+                    case $weekNumber < 1:
+                        $weekNumber = 1;
+                        break;
+                    case $weekNumber > 52:
+                        $weekNumber = 52;
+                        break;
+                    default:
+                        $weekNumber = $request -> input("weekNumber");
+                        break;
+                }
                 break;
             default:
                 $weekNumber = date("W");
