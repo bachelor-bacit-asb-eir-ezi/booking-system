@@ -26,6 +26,7 @@
                 @else <!-- Ledig time -->
                     <td>
                         <form method='POST' action='/bookTimeSlot' id='{{$timeSlot -> timeslot_id}}timeSlotForm'>
+                            @csrf
                             <input name="timeSlotId" type="hidden" value="{{$timeSlot->timeslot_id}}">
                             <input name="timeSlotDate" type="hidden" value="{{$timeSlot->date}}">
                             <input type="submit" value="Book time">
