@@ -31,10 +31,10 @@ class Day
           $j = strval($i);
           if ($i < 10){
             $keyVal = "0".$j.":00:00";
-            $timeArray[$keyVal] = null;
+            $timeArray[$keyVal] = array();
           } else{
             $keyVal = $j.":00:00";
-            $timeArray[$keyVal] = null;
+            $timeArray[$keyVal] = array();
           }
         }
         return $timeArray;

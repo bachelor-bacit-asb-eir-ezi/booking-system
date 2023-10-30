@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TimeSlot;
 use App\Models\Week;
+use Illuminate\Support\Facades\Auth;
 
 class TimeSlotController extends Controller
 {
@@ -56,7 +57,7 @@ class TimeSlotController extends Controller
     }
 
     #Sender bruket til createTimeSlot view
-    public function createTimeSlot(){
+    public function create(){
         //bare la og lærer skal kunne bruke denne
         return view("createTimeSlot");
     }
@@ -100,6 +101,7 @@ class TimeSlotController extends Controller
     }
 }
 
+#PLASSER I EGEN FIL (i en klasse som static metode?)
 function sanitize($text){
     $text = strip_tags($text);
     $text = htmlspecialchars($text);

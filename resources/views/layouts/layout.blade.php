@@ -18,31 +18,42 @@
         justify-content: center;
         align-items: center;
     }
+
     .day{
         margin-left: 20px;
         height: 50px;
         width: 100px;
     }
+
     .timeSlotStyle{
         border: solid 1px black;
         height: 50px;
         width: 100px;
     }
+
     .time{
         height: 50px;
         width: 100px;
         text-align: center;
         border: solid 1px black;
     }
+
     .calenderColumn{
         display:flex; 
         flex-direction: column; 
     }
+
     .occupiedTimeSlot{
         background-color: yellow;
     }
+
     .availebleTimeSlot{
         background-color: green;
+    }
+
+    .multipleTimeSlot{
+        background-color: blue;
+        overflow: hidden;
     }
 
     #infoTimeSlot{
@@ -54,6 +65,7 @@
         top: 0;
         display: none;
     }
+
 </style>
     @yield("content")
 </body>
