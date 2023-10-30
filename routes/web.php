@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TimeSlotController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,20 +20,18 @@ Route::get('/', function () {
 });
 
 
-
-Route::any("/timeslot", "App\Http\Controllers\TimeSlotController@index");
+Route::any("/timeslot", [TimeSlotController::class, "index"]);
 Route::post("/register", [UserController::class, "register"]);
 Route::post("/login", [UserController::class, "login"]);
 Route::post("/logout", [UserController::class, "logout"]);
 
 
+Route::get('/displayTimeSlot', [TimeSlotController::class,"displayTimeSlot"]);
 
-Route::get('/displayTimeSlot', "App\Http\Controllers\TimeSlotController@displayTimeSlot");
+Route::any("/createTimeSlot", [TimeSlotController::class, "createTimeSlot"]);
 
-Route::any("/createTimeSlot", "App\Http\Controllers\TimeSlotController@createTimeSlot");
+Route::post("/submitTimeSlot", [TimeSlotController::class, "submitTimeSlot"]);
 
-Route::post("/submitTimeSlot", "App\Http\Controllers\TimeSlotController@submitTimeSlot");
+Route::post("/bookTimeSlot", [TimeSlotController::class, "bookTimeSlot"]);
 
-Route::post("/bookTimeSlot", "App\Http\Controllers\TimeSlotController@bookTimeSlot");
-
-Route::post("/unBookTimeSlot", "App\Http\Controllers\TimeSlotController@unBookTimeSlot");
+Route::post("/unBookTimeSlot", [TimeSlotController::class, "unBookTimeSlot"]);

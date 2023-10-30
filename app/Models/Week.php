@@ -74,7 +74,7 @@ class Week
                 $timeSlotDate = $timeSlot -> date;
                 $day = $this -> getDayInWeekByDate($timeSlotDate);
                 if(!$day == null){
-                    $day -> timeArray[$timeSlotTime] = $timeSlot;
+                    array_push($day -> timeArray[$timeSlotTime], $timeSlot);
                 }
             }
     }
