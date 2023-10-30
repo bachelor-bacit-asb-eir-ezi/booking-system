@@ -56,6 +56,13 @@ class TimeSlotController extends Controller
         ]);
     }
 
+    public function tableView(){
+        $timeSlots = TimeSlot::orderBy("date") -> orderBy("start_time") -> get();
+        return view("timeSlotTableView", [
+            "timeSlots" => $timeSlots,
+        ]);
+    }
+
     #Sender bruket til createTimeSlot view
     public function create(){
         //bare la og lærer skal kunne bruke denne
