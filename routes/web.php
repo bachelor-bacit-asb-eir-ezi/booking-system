@@ -29,7 +29,7 @@ Route::post("/logout", [UserController::class, "logout"]);
 Route::get('/timeslot/tableView', [TimeSlotController::class,"tableView"]);
 Route::get('/displayTimeSlot', [TimeSlotController::class,"displayTimeSlot"]);
 
-Route::any("/createTimeSlot", [TimeSlotController::class, "createTimeSlot"]);
+Route::any("/timeslot/create", [TimeSlotController::class, "create"]);
 
 Route::post("/submitTimeSlot", [TimeSlotController::class, "submitTimeSlot"]);
 

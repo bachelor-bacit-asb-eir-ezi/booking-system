@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\TimeSlot;
 use App\Models\Week;
 use Illuminate\Support\Facades\Auth;
+use App\Models\tools\InputCheck;
+
 
 class TimeSlotController extends Controller
 {
@@ -73,11 +75,11 @@ class TimeSlotController extends Controller
     public function submitTimeSlot(Request $request){
         $tutorId = 1;
 
-        $date = sanitize($request -> input("date"));
-        $startTime = sanitize($request -> input("startTime"));
-        $endTime = date('h:i:s', strtotime($startTime)+3600);;
-        $location = sanitize($request -> input("location"));
-        $description = sanitize($request -> input("description"));
+        $date = InputCheck::sanitize($request -> input("date"));
+        $startTime = InputCheck::sanitize($request -> input("startTime"));
+        $endTime = date('h:i:s', strtotime($startTime)+3600);
+        $location = InputCheck::sanitize($request -> input("location"));
+        $description = InputCheck::sanitize($request -> input("description"));
 
         TimeSlot::create(["tutor_id" => $tutorId, "date" => $date,
                             "start_time" => $startTime, "end_time" => $endTime,
@@ -106,11 +108,4 @@ class TimeSlotController extends Controller
         TimeSlot::where("timeslot_id", $request -> input("timeSlotId")) -> update(["booked_by" => null]);
         return redirect("timeslot");
     }
-}
-
-#PLASSER I EGEN FIL (i en klasse som static metode?)
-function sanitize($text){
-    $text = strip_tags($text);
-    $text = htmlspecialchars($text);
-    return $text;
 }
