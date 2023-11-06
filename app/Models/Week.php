@@ -44,6 +44,10 @@ class Week
         return $this->weekNumber;
     }
 
+    public function getYear(){
+        return $this->year;
+    }
+
     public function getDaysInWeek(){
         return $this->daysInWeek;
     }
@@ -70,7 +74,7 @@ class Week
                 $timeSlotDate = $timeSlot -> date;
                 $day = $this -> getDayInWeekByDate($timeSlotDate);
                 if(!$day == null){
-                    $day -> timeArray[$timeSlotTime] = $timeSlot;
+                    array_push($day -> timeArray[$timeSlotTime], $timeSlot);
                 }
             }
     }

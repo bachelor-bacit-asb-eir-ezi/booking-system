@@ -45,9 +45,15 @@
                 <input type="submit" value="Unbook veilednings time">
             </form>
         @endif
-    @endforeach
-    <form action="/timeslot">
+    <!-- Tilbake knappen sender deg til samme uke som timeSlot er i ved bruk av searchWeek funksjonaliteten
+        Bare gå tilbake uten bruke av denne vil sende bruker til nåværende uke istedenfor uken bruker var i -->
+    <form method="POST" action="/timeslot">
+        @csrf
+        <input type="hidden" name="year" value="{{date('Y', strtotime($slot -> date))}}">
+        <input type="hidden" name="weekNumber" value="{{date('W', strtotime($slot -> date))}}">
+        <input type="hidden" name="changeWeek" value="searchWeek">
         <input type="submit" value="Tilbake">
     </form>
+    @endforeach
 </div>
 @endsection
